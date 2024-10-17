@@ -1,0 +1,192 @@
+part1)******
+set up reactjs and tailwind and create github repo
+
+
+
+part2)********
+create pages and routes
+inside src folder create pages folder
+inside pages folder create pages about.jsx,Home.jsx,SignIn.jsx,SignOut.jsx
+
+install react router dom in client folder for client side routing
+inside browser router specify routes and route and path and element for client side routing
+
+update to git using vs code without commands
+
+
+
+part3)************
+create header section which is common for all pages
+useNavigate() hook from react router dom is used for navigating to different pages
+
+
+
+part4)*************
+create and run the server
+create folder api
+go to folder mern estate and create package.json
+npm install express in mern estate
+
+
+part 5)***********
+connect to db
+npm install mongoose in mern-estate
+npm install dotenv in mern-estate
+create .env file in mern-estate and add MONGO variable assigned to the connection string
+import the dotenv module in index.js
+dotenv.config()
+add .env file to .gitignore before commit
+
+
+
+part 6) creating signup backend 
+part 7) creating signup frontend
+important parts were how to use formData and setFormData, show and hide passoword feature
+also understanding and defining proxy in vite.config.js file
+
+export default defineConfig({
+  server : {
+    proxy:{
+      '/api' : {
+        target : 'http://localhost:3000',
+        secure: false,
+      },
+    },
+  },
+  plugins: [react()],
+})
+
+
+Another imp part is loading effect 
+when the backend request is sent and while we have not yet received res , we need to disable the signup button
+we will use another state variable loading initially false , for the button we need to disabled it when loading is true code :  disabled:{loading}
+also when loading we need to change the text on the button {loading ? "loading" : "SIGN UP"}
+
+
+
+part 8) creating sign in api
+first we need to define signin controller
+it must first check for email and then password and if fine then use jwt to generate token and send token using cookie
+
+Cookies
+HTTP cookies. These are small pieces of data that websites store on a user's device. Cookies are commonly used for various purposes such as session management, tracking user behavior, personalization, and more.
+
+Types of Cookies:
+Session Cookies: These are temporary cookies that are erased when the user closes their web browser. They are used to maintain session information.
+
+Persistent Cookies: These cookies remain on the user's device for a specified period or until the user deletes them. They are often used for purposes like remembering login details or preferences.
+
+
+How Cookies Work:
+When a user visits a website, the server sends a response with a "Set-Cookie" header.
+The browser then stores this cookie.
+On subsequent requests to the same website, the browser sends the cookie data back to the server using the "Cookie" header.
+The server can then use this data to customize the user's experience, remember login status, etc.
+
+
+sending cookie in response
+
+res.cookie('access_token',token,{httpOnly:true}).status(200).json(validUser);
+
+res.cookie() is an Express method used to set cookies in the HTTP response.
+'access_token' is the name of the cookie being set.
+token is the value being assigned to the cookie. This is typically a JWT (JSON Web Token), which is commonly used for authentication purposes.
+{ httpOnly: true } is an option for the cookie settings. When httpOnly is set to true, it means that the cookie is only accessible through the HTTP protocol, and JavaScript running in the browser cannot access it. This is a security measure to prevent cross-site scripting (XSS) attacks.
+
+So in summary, this code snippet is a common pattern for handling authentication in a Node.js/Express application. It sets an httpOnly cookie named "access_token" with a JWT token, responds with a 200 status to indicate success, and sends back user data in JSON format.
+Since we have no mentioned the expires so it is a session cookie
+The cookie created in the provided code snippet is a session cookie. This is because it does not specify an expiration time, which means it will be removed when the user closes their browser. 
+
+
+part 9) create sign in page ui and functionality
+same as sign up page
+
+
+
+part 10) understanding redux toolkit from 6pack programmer
+create a project named redux toolkit in 100x devs
+npm i @reduxjs/toolkit react-redux
+
+part 11) add redux toolkit to mern estate project
+this section was all about creatin store and using configure store to add reducer
+also createSlice and exporting actions 
+use video to better understand this section.
+
+problem: after refreshing the page currentuser is set to null
+
+
+Add redux persist
+Helps to store data in localstorage.
+Whenever we refresh web app then we need to again login, to solve this problem use redux persist which stores the credentials in local storage
+
+
+part 10)
+google OAuth functionality
+
+
+part 11)
+update header and make profile page private
+
+private profile page means 
+http:localhost:3000/profile redirects you to home page if user is not log in
+
+part 12)
+complete profile page ui by seeing video
+
+part 13)
+understand useRef for file upload and complete image  upload functionality
+
+
+*********UseParams ******** 
+this hook is imported from react-router-dom
+we need to initialise this hook first
+then using this hook we can get the path parameters
+
+eg
+const params = useParams();
+const listingId = params.listingId;
+
+
+******* search api route ******
+we've used query parameters effectively to define the parameters for searching
+
+if we don't have query parameter for something then it is said to be undefined
+
+
+name : {$regex : searchTerm, $options : 'i'}
+this means we want to find listing where name has searchTerm in it and ($options : 'i') makes it case insensitive.
+
+similarly we have defined for offer,furnished, parking, type etc.
+
+skip(val)
+this skips val number of staring records/documents
+
+limit(n)
+gives only n records/documents
+
+
+
+******** Window.location.href ***********
+returns the current URL of the web page
+
+
+******** window.location.search **********
+returns the query string from the current URL of the web page.
+
+
+******* URLSearchParams ************
+is built-in JS class that provides an easy way to parse and access the parameters from a query string
+Therefore it returns a new URLSearchParams object with query string url. This object can be used to access and manipulate the parameters in the query  string
+
+
+eg : 
+// URL: https://example.com/?name=John&age=30
+
+const params = new URLSearchParams(window.location.search);
+
+console.log(params.get('name')); // Output: "John"
+console.log(params.get('age')); // Output: "30"
+
+output:
+John
+30
